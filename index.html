@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanjeev | Ultra Animated Portfolio</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: radial-gradient(circle at top, #0f2027, #000);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      text-shadow: 0 0 25px #00f2ff;
+    }
+
+    header span {
+      color: #00f2ff;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      margin-top: 15px;
+      min-height: 40px;
+    }
+
+    section { padding: 100px 10%; }
+
+    .glass {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 50px;
+      margin-bottom: 80px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    .skills-grid, .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.12);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.4s;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      transform: rotateY(15deg) rotateX(10deg) scale(1.08);
+      box-shadow: 0 0 30px #00f2ff;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin: 15px;
+      padding: 14px 35px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, #00f2ff, #00ff9c);
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .contact a:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 25px #00f2ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <div>
+    <h1 data-aos="zoom-in">Hi, I'm <span>Sanjeev</span></h1>
+    <p><span id="typed"></span></p>
+  </div>
+</header>
+
+<section>
+  <div class="glass" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>
+      I am a Computer Science student passionate about clean code, debugging,
+      and building visually impressive yet functional projects. I love learning
+      by building and breaking things.
+    </p>
+  </div>
+
+  <div class="glass" data-aos="fade-right">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="card">Python</div>
+      <div class="card">SQL</div>
+      <div class="card">ML & AI Basics</div>
+      <div class="card">Web Development</div>
+      <div class="card">Git & GitHub</div>
+    </div>
+  </div>
+
+  <div class="glass" data-aos="fade-left">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="card">Online Quiz Web Application</div>
+      <div class="card">AI-Based Healthcare System</div>
+    </div>
+  </div>
+
+  <div class="glass contact" data-aos="zoom-in">
+    <h2>Contact</h2>
+    <a href="mailto:kotisanjeev42@gmail.com" target="_blank">Email</a>
+    <a href="https://github.com/Sanju9008" target="_blank">GitHub Profile</a>
+    <a href="https://linkedin.com/in/sanjeev-koti-039149264" target="_blank">LinkedIn Profile</a>
+  </div>
+</section>
+
+<footer>© 2026 Sanjeev | Level 3 Ultra Animated Portfolio</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1200, once: true });
+
+new Typed('#typed', {
+  strings: [
+    'Python Developer',
+    'Web Developer',
+    'ML & AI Learner'
+  ],
+  typeSpeed: 60,
+  backSpeed: 40,
+  loop: true
+});
+
+// PARTICLES
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    dx: Math.random() * 0.5,
+    dy: Math.random() * 0.5
+  });
+}
+
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = '#00f2ff';
+    ctx.fill();
+    p.x += p.dx; p.y += p.dy;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y > canvas.height) p.y = 0;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
